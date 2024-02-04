@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Logo from "../ui/Logo";
 import LoginForm from "../features/authentication/LoginForm.jsx";
 
 const LoginLayout = styled.main`
@@ -15,7 +14,6 @@ const LoginLayout = styled.main`
 function Login() {
   return (
     <LoginLayout>
-      <Logo />
       <LoginForm />
     </LoginLayout>
   );

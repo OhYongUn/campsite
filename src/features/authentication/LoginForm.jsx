@@ -2,11 +2,14 @@ import { useState } from "react";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
+import FormRowVertical from "../../ui/FormRowVertical";
 import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
-import FormRow from "../../ui/FormRow.jsx";
+import {useNavigate} from "react-router-dom";
 
 function LoginForm() {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { login, isLoading } = useLogin();
@@ -27,18 +30,19 @@ function LoginForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <FormRow label="email" orientation="vertical">
+            <FormRowVertical label="아이디">
                 <Input
                     type="email"
                     id="email"
+                    // This makes this form better for password managers
                     autoComplete="username"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isLoading}
                 />
-            </FormRow>
+            </FormRowVertical>
 
-            <FormRow label="email" orientation="vertical">
+            <FormRowVertical label="비밀번호">
                 <Input
                     type="password"
                     id="password"
@@ -47,12 +51,16 @@ function LoginForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isLoading}
                 />
-            </FormRow>
-            <FormRow label="email" orientation="vertical">
+            </FormRowVertical>
+            <FormRowVertical>
                 <Button size="large" disabled={isLoading}>
-                    {!isLoading ? "Log in" : <SpinnerMini />}
+                    {!isLoading ? "로그인" : <SpinnerMini />}
                 </Button>
-            </FormRow>
+                <Button size="large" disabled={isLoading} onClick={()=>{ navigate('/SignUp')}}>
+
+                {!isLoading ? "회원가입" : <SpinnerMini />}
+                </Button>
+            </FormRowVertical>
         </Form>
     );
 }
